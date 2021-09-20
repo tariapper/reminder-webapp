@@ -2,7 +2,7 @@ import bottle
 
 @bottle.route("/")
 def htmlLoad():
-    return bottle.static_file("index.html",root=".")
+    return bottle.static_file("templates/index.html", root=".")
 
 
 if __name__ == "__main__":

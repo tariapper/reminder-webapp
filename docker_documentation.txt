@@ -6,3 +6,6 @@ The current Dockerfile includes comments that describe what each line does, and 
 
 See following video (from Jesse) for further explanation: https://youtu.be/gP6sp-cvQVk
 See following webpage for further explanation: https://docs.docker.com/get-started/
+
+docker build -t reminderwebapp .
+docker run -p 5000:5000 reminderwebapp
