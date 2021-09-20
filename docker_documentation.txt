@@ -1,0 +1,8 @@
+Docker is a container that runs an instance of ubuntu and is able to run the backend server.
+
+It runs via a Dockerfile, which sets up the container with any necessary installs like python or javascript.
+
+The current Dockerfile includes comments that describe what each line does, and works as of 9/19/21 22:51.
+
+See following video (from Jesse) for further explanation: https://youtu.be/gP6sp-cvQVk
+See following webpage for further explanation: https://docs.docker.com/get-started/
