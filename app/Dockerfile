@@ -1,11 +1,13 @@
 FROM python:3.8
 #install python 3.8
 
-COPY . .
+COPY .. .
 #copy project from current directory
 
-RUN pip3 install bottle
-RUN pip3 install flask
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+#RUN pip3 install bottle
+#RUN pip3 install flask
 
 EXPOSE 5000
 #open up port 5000 on the docker container
