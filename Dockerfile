@@ -1,7 +1,7 @@
 FROM python:3.8
 #install python 3.8
 
-COPY .. .
+COPY . .
 #copy project from current directory
 
 COPY app/requirements.txt ./
