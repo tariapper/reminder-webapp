@@ -14,5 +14,5 @@ EXPOSE $PORT
 
 #CMD ["python3","test_server.py"]
 #CMD ["python3","bottle_server.py"]
-CMD ["python3","flask_server.py","$PORT"]
+CMD python3 flask_server.py $PORT
 #run test_server.py
