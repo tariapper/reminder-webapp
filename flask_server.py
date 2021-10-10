@@ -1,10 +1,11 @@
-#https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3
+# https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3
 import os
 import sys
 
 from flask import Flask, render_template
 
 app = Flask(__name__)
+
 
 @app.route('/test')
 def index2():
@@ -24,11 +25,19 @@ def index2():
 
     print(data_from_database)
     return str(db_config)
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
-if __name__=="__main__":
+
+@app.route('navbar_test')
+def navbar():
+    return render_template('navbar.html')
+
+
+if __name__ == "__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
-    app.run(host="0.0.0.0",port=port,debug=True)
-    #print(flask.__version__)
+    app.run(host="0.0.0.0", port=port, debug=True)
+    # print(flask.__version__)
