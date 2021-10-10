@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 setup:
   addons:
     - plan: heroku-postgresql
@@ -5,4 +6,11 @@ setup:
 
 build:
   docker:
+=======
+setup:
+  addons:
+    - plan: heroku-postgresql
+build:
+  docker:
+>>>>>>> ae98fac476ecae4c044341363391af9493e0129b
     web: Dockerfile
