@@ -32,7 +32,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('navbar_test')
+@app.route('/navbar_test')
 def navbar():
     return render_template('navbar.html')
 
