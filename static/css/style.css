@@ -4,6 +4,21 @@
 body {
   font-size: 14px;
 }
+/*https://www.w3schools.com/css/css_navbar.asp*/
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #223a79;
+}
+
+li a {
+  display: block;
+  color: #f16800;
+  padding: 8px 16px;
+  text-decoration: none;
+}
 .v1_2 {
   width: 100%;
   height: 720px;
