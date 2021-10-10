@@ -36,6 +36,18 @@ def index():
 def navbar():
     return render_template('navbar.html')
 
+@app.route('/tasks-reminders')
+def index_tasks_reminders():
+    return render_template('tasks_reminders.html')
+
+@app.route('/calander')
+def index_calander():
+    return render_template('calander.html')
+
+@app.route('/settings')
+def index_settings():
+    return render_template('settings.html')
+
 
 if __name__ == "__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
