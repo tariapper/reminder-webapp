@@ -34,7 +34,7 @@ def createAcc(un,p):
     cur = conn.cursor()
     cur.execute("CREATE TABLE IF NOT EXISTS accounts (username varchar, password varchar);")
     cur.execute("INSERT INTO accounts (username, password) VALUES (%s, %s)", (un, p,))
-
+    #changey
 
 @app.route('/')
 def index():
