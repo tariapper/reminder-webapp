@@ -1,4 +1,5 @@
 # https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3
+import json
 import os
 import sys
 
@@ -41,16 +42,26 @@ def index():
     #login()
     return render_template('login.html')
 
-@app.route('/', methods=['POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        print(username)
-        print(password)
-    #print("HELLO WORLD")
+
+@app.post("/userLogin")
+def userLogin():
+    content = request.get_data()
+    content = content.decode()
+    unpackJson(content)
+    return ""
+
+def unpackJson(jsonDict):
+    return
+    #Kurt will implement unpacking of json string. Keys are "username" and "password"
+    #return (username,password)
 
 if __name__=="__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
     app.run(host="0.0.0.0", port=port, debug=True)
     # print(flask.__version__)
+
+
+
+#content_ = json.loads(content)
+#print(content_['username'])
+#print(content_['password'])

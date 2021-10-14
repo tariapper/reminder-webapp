@@ -3,20 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>Login Page</title>
+    <script src="{{url_for('static', filename='script.js')}}"></script>
 </head>
 <body>
-<form method="POST">
-    <input name="username" placeholder="Username">
-
-    <input name="password" type="password" placeholder="Password">
-    <input type="submit">
-</form>
-<!--<div class="login">
-    <label for="name">Username:</label>
-    <input type="text" id="name"><br><br>
-    <label for="password">Password:</label>
-    <input type="password" id="password"><br><br>
-    <input type="submit" value="Login">
-</div>-->
+    <input name="username" id="username" placeholder="Username">
+    <input name="password" id="password" type="password" placeholder="Password">
+    <button type="button" style="margin:auto;background-color:lightgreen" onclick="userLogin();">LOGIN</button>
 </body>
 </html>
