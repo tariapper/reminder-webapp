@@ -40,9 +40,9 @@ def navbar():
 def index_tasks_reminders():
     return render_template('tasks_reminders.html')
 
-@app.route('/calander')
-def index_calander():
-    return render_template('calander.html')
+@app.route('/calendar')
+def index_calendar():
+    return render_template('calendar.html')
 
 @app.route('/settings')
 def index_settings():
