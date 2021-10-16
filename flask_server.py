@@ -48,11 +48,12 @@ def userLogin():
     content = request.get_data()
     content = content.decode()
     unpackJson(content)
-    return ""
+    return content
 
 def unpackJson(jsonDict):
     return
     #Kurt will implement unpacking of json string. Keys are "username" and "password"
+    #Kurt will call Ibrahim's function which will use the database to check if username/pw is valid
     #return (username,password)
 
 if __name__=="__main__":

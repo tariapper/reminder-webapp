@@ -25,8 +25,12 @@ function userLogin(){
     document.getElementById('username').value='';
     document.getElementById('password').value='';
     let userPwDictionary = {"username":username, "password":password}
-    ajaxPostRequest("/userLogin", JSON.stringify(userPwDictionary), none);
-    function none(data){
+    ajaxPostRequest("/userLogin", JSON.stringify(userPwDictionary), identify);
+    //ajaxPostRequest("/userLogin", JSON.stringify(userPwDictionary));
+    function identify(data){
+      let user = JSON.parse(data).username;
+      let message = "WELCOME, " + user;
+      document.getElementById('welcome').innerText=message;
       //let jsonned=JSON.parse(data);
       //console.log(jsonned)
       //Plotly.newPlot("fullPieDiv",jsonned,{"title":"Percentage of People Homeless in NYC by Borough: 2009"});
