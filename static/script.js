@@ -31,8 +31,8 @@ function userLogin(){
       //let user = JSON.parse(data).username;
       //let message = "WELCOME, " + user;
       //document.getElementById('welcome').innerText=message;
-      console.log(JSON.parse(data).username);
-      console.log(JSON.parse(data).password);
+      //console.log(JSON.parse(data).username);
+      //console.log(JSON.parse(data).password);
     }
 }
 
@@ -48,7 +48,7 @@ function userRegister(){
       //let user = JSON.parse(data).username;
       //let message = "WELCOME, " + user;
       //document.getElementById('welcome').innerText=message;
-      console.log(JSON.parse(data).username);
-      console.log(JSON.parse(data).password);
+      //console.log(JSON.parse(data).username);
+      //console.log(JSON.parse(data).password);
     }
 }
