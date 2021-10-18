@@ -8,7 +8,6 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-
 @app.route('/test')
 def index2():
     db_config = os.environ['DATABASE_URL'] if 'DATABASE_URL' in os.environ else 'user=postgres password=password'
@@ -37,12 +36,6 @@ def createAcc(un,p):
     cur.execute("INSERT INTO accounts (username, password) VALUES (%s, %s)", (un, p,))
     #changey
 
-@app.route('/')
-def index():
-    #login()
-    return render_template('login.html')
-
-
 @app.post("/userLogin")
 def userLogin():
     content = request.get_data()
@@ -56,13 +49,32 @@ def unpackJson(jsonDict):
     #Kurt will call Ibrahim's function which will use the database to check if username/pw is valid
     #return (username,password)
 
+@app.route('/')
+def index():
+    return render_template('login.html')
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+@app.route('/navbar_test')
+def navbar():
+    return render_template('navbar.html')
+
+@app.route('/tasks-reminders')
+def index_tasks_reminders():
+    return render_template('tasks_reminders.html')
+
+@app.route('/calendar')
+def index_calendar():
+    return render_template('calendar.html')
+
+@app.route('/settings')
+def index_settings():
+    return render_template('settings.html')
+
+
 if __name__=="__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
-    app.run(host="0.0.0.0", port=port, debug=True)
-    # print(flask.__version__)
-
-
-
-#content_ = json.loads(content)
-#print(content_['username'])
-#print(content_['password'])
+    app.run(host="0.0.0.0",port=port,debug=True)
+    #print(flask.__version__)

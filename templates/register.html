@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bulma.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <title>Register</title>
+</head>
+<body>
+<div class="register">
+    <div class="logo has-text-centered">
+        <figure class="image is-128x128 is-inline-block">
+            <img src="../static/images/v103_5.png">
+        </figure>
+    </div>
+    <div class="field">
+        <div class="control has-icons-left has-icons-right">
+            <input class="input" type="text" id="name" placeholder="Username">
+            <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+            </span>
+        </div>
+    </div>
+    <div class="field">
+        <p class="control has-icons-left">
+            <input class="input" type="password" id="password" placeholder="Password">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+        </p>
+    </div>
+    <div class="control">
+        <button class="button login" id="register">Register</button>
+    </div>
+    <br>
+    <a href="/">Already have an account? Click here to login.</a>
+</div>
+</body>
+</html>
