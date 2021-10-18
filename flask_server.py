@@ -4,9 +4,10 @@ import json
 import os
 import sys
 
+import flask
 import psycopg2
 from flask import Flask, render_template, request
-
+from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 
 @app.route('/test')
@@ -41,15 +42,35 @@ def createAcc(un,p):
 def userLogin():
     content = request.get_data()
     content = content.decode()
-    unpackJson(content)
-    return content
+    up = unpackJson(content)
+
+    db_config = os.environ['DATABASE_URL'] if 'DATABASE_URL' in os.environ else 'user=postgres password=password'
+    conn = psycopg2.connect(db_config, sslmode='require')
+    cur = conn.cursor()
+
+    x = cur.execute("SELECT* FROM users where username = %s ", (up[0],))
+    if x is not None:
+        if check_password_hash(x[1], up[1]):
+            flask.redirect("tasks_reminders")
+
 
 @app.post("/userRegister")
 def userRegister():
     content = request.get_data()
     content = content.decode()
-    unpackJson(content)
-    return content
+    up = unpackJson(content)
+
+    db_config = os.environ['DATABASE_URL'] if 'DATABASE_URL' in os.environ else 'user=postgres password=password'
+    conn = psycopg2.connect(db_config, sslmode='require')
+    cur = conn.cursor()
+
+    x = cur.execute("SELECT COUNT(*) FROM users where username = %s ", (up[0],))
+    if x == 0:
+        cur.execute("INSERT INTO users (username, name) VALUES (%s, %s)", (up[0], generate_password_hash(up[1]),))
+        return True
+    conn.commit()
+    return False
+
 
 def unpackJson(jsonDict):
     ##
