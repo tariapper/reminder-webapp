@@ -28,3 +28,34 @@ a {
     border-color: transparent;
     color: whitesmoke;
 }
+
+.menu {
+    position: sticky;
+    display: inline-block;
+    vertical-align: top;
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow: hidden;
+    top: 0;
+    bottom: 0;
+    padding: 30px;
+}
+
+.columns.is-fullheight {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+}
+
+.columns.is-fullheight .column {
+    overflow-y: auto;
+}
+
+.column.is-side {
+    background: #FFFFFF;
+}
+
+.column.is-main {
+    background: #2148C0;
+}

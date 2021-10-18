@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bulma.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <script type='text/javascript' src="{{ url_for('static', filename= 'script.js') }}"></script>
-    <title>Tasks/Reminders</title>
+    <title>Calander</title>
 </head>
 <body>
-    <div class="navbar">
-        <ul>
-            <li><a href="https://reminder-webapp.herokuapp.com/tasks-reminders">Tasks/Reminders</a></li>
-            <li><a href="https://reminder-webapp.herokuapp.com/calendar">Calendar</a></li>
-            <li><a href="https://reminder-webapp.herokuapp.com/settings">Settings</a></li>
-        </ul>
+    <div class="columns is-fullheight is-gapless is-side"> <!-- Full height https://github.com/jgthms/bulma/issues/860 -->
+        <div class="column is-2 is-side">
+            <aside class="menu">
+                <a><img src="../static/images/v103_5.png" width="200" height="200"></a>
+                <p class="menu-label">Navigation </p>
+                <ul class="menu-list">
+                    <li><a href="https://reminder-webapp.herokuapp.com/tasks-reminders">Tasks/Reminders</a></li>
+                    <li><a href="https://reminder-webapp.herokuapp.com/calendar">Calendar</a></li>
+                    <li><a href="https://reminder-webapp.herokuapp.com/settings">Settings</a></li>
+                </ul>
+            </aside>
+        </div>
+        <div class="column is-main">
+            <h1> Test page for calander </h1>
+        </div>
     </div>
-    <p>Temporary page for the calendar webpage.</p>
 </body>
 </html>
