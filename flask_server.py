@@ -43,6 +43,13 @@ def userLogin():
     unpackJson(content)
     return content
 
+@app.post("/userRegister")
+def userRegister():
+    content = request.get_data()
+    content = content.decode()
+    unpackJson(content)
+    return content
+
 def unpackJson(jsonDict):
     return
     #Kurt will implement unpacking of json string. Keys are "username" and "password"

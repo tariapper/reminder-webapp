@@ -20,19 +20,35 @@ function ajaxPostRequest(path, data, callback){
 }
 
 function userLogin(){
-    let username = document.getElementById('username').value;
+    let username = document.getElementById('name').value;
     let password = document.getElementById('password').value;
-    document.getElementById('username').value='';
+    document.getElementById('name').value='';
     document.getElementById('password').value='';
     let userPwDictionary = {"username":username, "password":password}
     ajaxPostRequest("/userLogin", JSON.stringify(userPwDictionary), identify);
     //ajaxPostRequest("/userLogin", JSON.stringify(userPwDictionary));
     function identify(data){
-      let user = JSON.parse(data).username;
-      let message = "WELCOME, " + user;
-      document.getElementById('welcome').innerText=message;
-      //let jsonned=JSON.parse(data);
-      //console.log(jsonned)
-      //Plotly.newPlot("fullPieDiv",jsonned,{"title":"Percentage of People Homeless in NYC by Borough: 2009"});
+      //let user = JSON.parse(data).username;
+      //let message = "WELCOME, " + user;
+      //document.getElementById('welcome').innerText=message;
+      console.log(JSON.parse(data).username);
+      console.log(JSON.parse(data).password);
+    }
+}
+
+function userRegister(){
+    let username = document.getElementById('name').value;
+    let password = document.getElementById('password').value;
+    document.getElementById('name').value='';
+    document.getElementById('password').value='';
+    let userPwDictionary = {"username":username, "password":password}
+    ajaxPostRequest("/userRegister", JSON.stringify(userPwDictionary), identify);
+    //ajaxPostRequest("/userLogin", JSON.stringify(userPwDictionary));
+    function identify(data){
+      //let user = JSON.parse(data).username;
+      //let message = "WELCOME, " + user;
+      //document.getElementById('welcome').innerText=message;
+      console.log(JSON.parse(data).username);
+      console.log(JSON.parse(data).password);
     }
 }
