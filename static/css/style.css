@@ -15,6 +15,10 @@ html {
     width: 40%;
 }
 
+.tasks {
+    padding-top: 2.5%;
+}
+
 a {
     color: whitesmoke;
 }

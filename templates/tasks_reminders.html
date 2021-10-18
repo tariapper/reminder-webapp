@@ -3,16 +3,40 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bulma.min.css') }}">
     <title>Tasks/Reminders</title>
+    <link rel="stylesheet" href="../static/css/bulma.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
-    <div class="navbar">
-        <ul>
-            <li><a href="https://reminder-webapp.herokuapp.com/tasks-reminders">Tasks/Reminders</a></li>
-            <li><a href="https://reminder-webapp.herokuapp.com/calendar">Calendar</a></li>
-            <li><a href="https://reminder-webapp.herokuapp.com/settings">Settings</a></li>
-        </ul>
+<!--
+<div class="navbar">
+    <ul>
+        <li><a href="https://reminder-webapp.herokuapp.com/tasks-reminders">Tasks/Reminders</a></li>
+        <li><a href="https://reminder-webapp.herokuapp.com/calendar">Calendar</a></li>
+        <li><a href="https://reminder-webapp.herokuapp.com/settings">Settings</a></li>
+    </ul>
+</div>!-->
+<div class="container tasks">
+    <div class="tile is-ancestor">
+        <div class="tile is-parent is-vertical">
+            <div class="tile is-child box">
+                <input class="input" type="text" placeholder="Add task" id="new_task">
+            </div>
+            <br>
+            <br>
+            <div class="tile is-child box">
+                <span class="tag is-primary is-light is-medium">October 14, 2021</span>
+                <span class="tag is-danger is-light">sample group</span>
+                <span class="tag is-info is-light">sample group2</span>
+                <p class="subtitle">Do task.</p>
+            </div>
+            <div class="tile is-child box">
+                test
+            </div>
+
+        </div>
     </div>
-    <p>Temporary page for the Tasks/Reminders webpage.</p>
+</div>
 </body>
 </html>
