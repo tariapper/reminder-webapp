@@ -1,4 +1,5 @@
 # https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3
+import bcrypt
 import json
 import os
 import sys
@@ -51,10 +52,12 @@ def userRegister():
     return content
 
 def unpackJson(jsonDict):
-    return
-    #Kurt will implement unpacking of json string. Keys are "username" and "password"
-    #Kurt will call Ibrahim's function which will use the database to check if username/pw is valid
-    #return (username,password)
+    username_key, password_key = 'username', 'password'
+    obj = json.loads(jsonDict)
+    username, password = obj[username_key], obj[password_key]
+    print(username)
+    print(password)
+    return username, password
 
 @app.route('/')
 def index():
