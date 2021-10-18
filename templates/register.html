@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bulma.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/all.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <title>Register</title>
 </head>
 <body>
 <div class="register">
-    <div class="logo">
-        <figure class="image is-128x128">
+    <div class="logo has-text-centered">
+        <figure class="image is-128x128 is-inline-block">
             <img src="../static/images/v103_5.png">
         </figure>
     </div>
@@ -32,7 +31,7 @@
         </p>
     </div>
     <div class="control">
-        <button class="button is-link" id="register">Register</button>
+        <button class="button login" id="register">Register</button>
     </div>
     <br>
     <a href="/">Already have an account? Click here to login.</a>

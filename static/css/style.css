@@ -1,3 +1,7 @@
+html {
+    background-color: #2148C0;
+}
+
 .register {
     margin: auto;
     width: 25%;
@@ -9,4 +13,14 @@
     margin-left: auto;
     margin-right: auto;
     width: 40%;
+}
+
+a {
+    color: whitesmoke;
+}
+
+.login {
+    background-color: #e87121;
+    border-color: transparent;
+    color: whitesmoke;
 }
