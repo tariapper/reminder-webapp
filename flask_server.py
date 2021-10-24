@@ -1,5 +1,6 @@
 # https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3
 import os
+import sys
 import flask
 import flask_login
 import util
@@ -113,6 +114,6 @@ def load_user(username):
 
 
 if __name__ == "__main__":
-    # port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
+    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
     # print("test")
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', port=port, debug=True)
