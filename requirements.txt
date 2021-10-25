@@ -1,2 +1,4 @@
 flask
-bottle
+werkzeug
+psycopg2
+flask_login
