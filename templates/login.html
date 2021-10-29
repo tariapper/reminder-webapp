@@ -5,13 +5,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bulma.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
-    <!--<link rel="stylesheet" href="../static/css/bulma.min.css">
-    <link rel="stylesheet" href="../static/css/style.css">!-->
     <script type='text/javascript' src="{{ url_for('static', filename= 'script.js') }}"></script>
     <title>Login</title>
 </head>
 <body>
 <div class="register">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0]}}
+    </div>
+    {% endif %}
+    {% endwith %}
     <form method="POST" action="/">
     <div class="logo has-text-centered">
         <figure class="image is-128x128 is-inline-block">

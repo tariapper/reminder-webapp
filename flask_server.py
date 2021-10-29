@@ -38,11 +38,13 @@ def loginGET():
 @app.route('/', methods=['POST'])
 def loginPOST():
     username = util.loginUser()
-    if username:
-        user = load_user(username)
-        flask_login.login_user(user, remember=True)
-        return flask.redirect(flask.url_for('index_tasks_reminders'))
-    return flask.redirect(flask.url_for('loginGET'))
+    if not username:
+        flask.flash('Username/password incorrect.')
+        return flask.redirect(flask.url_for('loginGET'))
+
+    user = load_user(username)
+    flask_login.login_user(user, remember=True)
+    return flask.redirect(flask.url_for('index_tasks_reminders'))
 
 
 @app.route('/register', methods=['GET'])
@@ -52,12 +54,19 @@ def registerGET():
 
 @app.route('/register', methods=['POST'])
 def registerPOST():
-    username = util.registerUser()
-    if username:
-        user = load_user(username)
-        flask_login.login_user(user, remember=True)
-        return flask.redirect(flask.url_for('index_tasks_reminders'))
-    return flask.redirect(flask.url_for('registerGET'))
+    user = util.getUserPass()
+    if util.isUser(user[0]):
+        flask.flash('User already exists.')
+        return flask.redirect(flask.url_for('registerGET'))
+
+    username = util.registerUser(user)
+    if not username:
+        flask.flash('Username/password cannot be empty.')
+        return flask.redirect(flask.url_for('registerGET'))
+
+    user = load_user(username)
+    flask_login.login_user(user, remember=True)
+    return flask.redirect(flask.url_for('index_tasks_reminders'))
 
 
 @app.route('/navbar_test')

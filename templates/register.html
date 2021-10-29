@@ -10,6 +10,13 @@
 </head>
 <body>
 <div class="register">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0]}}
+    </div>
+    {% endif %}
+    {% endwith %}
     <form method="POST" action="/register">
     <div class="logo has-text-centered">
         <figure class="image is-128x128 is-inline-block">
