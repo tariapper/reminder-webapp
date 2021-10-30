@@ -8,8 +8,8 @@ import util
 app = flask.Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
 login_manager = flask_login.LoginManager()
+login_manager.login_view = 'loginGET'
 login_manager.init_app(app)
-myUser = ""
 
 
 # @app.route('/test')
@@ -18,10 +18,12 @@ myUser = ""
 #
 #     print(db_config)
 #
+#     import psycopg2
 #     conn = psycopg2.connect(db_config, sslmode='require')
 #     cur = conn.cursor()
-#     # cur.execute("DROP TABLE users;")
-#     # cur.execute("CREATE TABLE users (username varchar, password varchar);")
+#     cur.execute("DROP TABLE users;")
+#     cur.execute("CREATE TABLE users (username varchar, password varchar);")
+#     conn.commit()
 #
 #     cur.execute("SELECT * FROM users;")
 #     data_from_database = cur.fetchall()
@@ -30,12 +32,12 @@ myUser = ""
 #     return str(data_from_database)
 
 
-@app.route('/', methods=['GET'])
+@app.route('/login', methods=['GET'])
 def loginGET():
     return flask.render_template('login.html')
 
 
-@app.route('/', methods=['POST'])
+@app.route('/login', methods=['POST'])
 def loginPOST():
     username = util.loginUser()
     if not username:
@@ -69,13 +71,20 @@ def registerPOST():
     return flask.redirect(flask.url_for('index_tasks_reminders'))
 
 
+@app.route('/logout')
+@flask_login.login_required
+def logout():
+    flask_login.logout_user()
+    return flask.redirect(flask.url_for('loginGET'))
+
+
 @app.route('/navbar_test')
 @flask_login.login_required
 def navbar():
     return flask.render_template('navbar.html')
 
 
-@app.route('/tasks-reminders')
+@app.route('/')
 @flask_login.login_required
 def index_tasks_reminders():
     return flask.render_template('tasks_reminders.html', name=flask_login.current_user.username)
@@ -117,12 +126,9 @@ class User(flask_login.UserMixin):
 
 @login_manager.user_loader
 def load_user(username):
-    # 1. Fetch against the database a user by `id`
-    # 2. Create a new object of `User` class and return it.
     return User(username, True)
 
 
 if __name__ == "__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
-    # print("test")
     app.run(host='0.0.0.0', port=port, debug=True)

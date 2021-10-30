@@ -8,40 +8,40 @@
 <body>
 <div class="register">
     {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <div class="notification is-danger">
-        {{ messages[0]}}
-    </div>
-    {% endif %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
     {% endwith %}
     <form method="POST" action="/register">
-    <div class="logo has-text-centered">
-        <figure class="image is-128x128 is-inline-block">
-            <img src="../static/images/logo.png">
-        </figure>
-    </div>
-    <div class="field">
-        <div class="control has-icons-left has-icons-right">
-            <input class="input" type="text" name="name" placeholder="Username">
-            <span class="icon is-small is-left">
+        <div class="logo has-text-centered">
+            <figure class="image is-128x128 is-inline-block">
+                <img src="../static/images/logo.png">
+            </figure>
+        </div>
+        <div class="field">
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" type="text" name="name" placeholder="Username">
+                <span class="icon is-small is-left">
                 <i class="fas fa-user"></i>
             </span>
+            </div>
         </div>
-    </div>
-    <div class="field">
-        <p class="control has-icons-left">
-            <input class="input" type="password" name="password" placeholder="Password">
-            <span class="icon is-small is-left">
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input" type="password" name="password" placeholder="Password">
+                <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
             </span>
-        </p>
-    </div>
-    <div class="control">
-        <button class="button login">Register</button>
-    </div>
+            </p>
+        </div>
+        <div class="control">
+            <button class="button login">Register</button>
+        </div>
     </form>
     <br>
-    <a href="/">Already have an account? Click here to login.</a>
+    <a href="/login">Already have an account? Click here to login.</a>
 </div>
 </body>
 </html>
