@@ -27,14 +27,14 @@ def isUser(username):
     return False
 
 
-def registerUser():
+def registerUser(user):
     """
     get username from frontend
     attempts to add user to database
     @return: username if user was added, False otherwise
     """
-    user = getUserPass()
-    if not isUser(user[0]):
+    # if not isUser(user[0]):
+    if len(user[0]) > 0 and len(user[1]) > 0:  # could implement stronger password check here
         conn = psycopg2.connect(db_config, sslmode='require')
         cur = conn.cursor()
         cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)",
