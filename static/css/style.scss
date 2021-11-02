@@ -1,0 +1,36 @@
+@charset "utf-8";
+@import "bulma.min.css";
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css";
+
+
+html {
+    background-color: #2148C0;
+}
+
+.register {
+    margin: auto;
+    width: 25%;
+    padding-top: 15%;
+}
+
+.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+.tasks {
+    padding-top: 2.5%;
+}
+
+a {
+    color: whitesmoke;
+}
+
+.login {
+    background-color: #e87121;
+    border-color: transparent;
+    color: whitesmoke;
+}
+
