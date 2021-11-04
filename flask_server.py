@@ -12,24 +12,21 @@ login_manager.login_view = 'loginGET'
 login_manager.init_app(app)
 
 
-# @app.route('/test')
-# def index2():
-#     db_config = os.environ['DATABASE_URL'] if 'DATABASE_URL' in os.environ else 'user=postgres password=password'
-#
-#     print(db_config)
-#
-#     import psycopg2
-#     conn = psycopg2.connect(db_config, sslmode='require')
-#     cur = conn.cursor()
-#     cur.execute("DROP TABLE users;")
-#     cur.execute("CREATE TABLE users (username varchar, password varchar);")
-#     conn.commit()
-#
-#     cur.execute("SELECT * FROM users;")
-#     data_from_database = cur.fetchall()
-#
-#     print(data_from_database)
-#     return str(data_from_database)
+@app.route('/test')
+def index2():
+    db_config = os.environ['DATABASE_URL'] if 'DATABASE_URL' in os.environ else 'user=postgres password=password'
+
+    print(db_config)
+
+    import psycopg2
+    conn = psycopg2.connect(db_config, sslmode='require')
+    cur = conn.cursor()
+
+    cur.execute("SELECT * FROM users;")
+    data_from_database = cur.fetchall()
+
+    print(data_from_database)
+    return str(data_from_database)
 
 
 @app.route('/login', methods=['GET'])
