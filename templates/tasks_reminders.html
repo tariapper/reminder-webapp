@@ -23,21 +23,16 @@
     <div class="tile is-ancestor">
         <div class="tile is-parent is-vertical">
             <div class="tile is-child box">
-                <input class="input" type="text" placeholder="Add task" id="new_task">
+                <form method="POST" action="/">
+                    <input class="input" type="text" placeholder="Add task" id="new_task">
+                    <input class="input" type="date" placeholder="Deadline" id="deadline">
+                    <div class="control">
+                        <button class="button">Add task</button>
+                    </div>
+                </form>
             </div>
             <br>
             <br>
-
-            <div class="tile is-child box">
-                <span class="tag is-primary is-light is-medium">October 14, 2021</span>
-                <span class="tag is-danger is-light">sample group</span>
-                <span class="tag is-info is-light">sample group2</span>
-                <p class="subtitle">Do task.</p>
-            </div>
-            <div class="tile is-child box">
-                <p class="tile"> username: {{ name }}</p>
-            </div>
-
         </div>
     </div>
 </div>
