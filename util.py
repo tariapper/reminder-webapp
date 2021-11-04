@@ -59,3 +59,9 @@ def loginUser():
         if password is not None and check_password_hash(password[1], user[1]):
             return user[0]
     return False
+
+def getNewTask():
+    """
+    @return: returns a tuple containing task info from frontend
+    """
+    return request.form.get('new_task'),request.form.get('deadline')

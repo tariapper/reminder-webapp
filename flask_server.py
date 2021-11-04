@@ -43,7 +43,7 @@ def loginPOST():
 
     user = load_user(username)
     flask_login.login_user(user, remember=True)
-    return flask.redirect(flask.url_for('index_tasks_reminders'))
+    return flask.redirect(flask.url_for('index_tasks_remindersGET'))
 
 
 @app.route('/register', methods=['GET'])
@@ -65,7 +65,7 @@ def registerPOST():
 
     user = load_user(username)
     flask_login.login_user(user, remember=True)
-    return flask.redirect(flask.url_for('index_tasks_reminders'))
+    return flask.redirect(flask.url_for('index_tasks_remindersGET'))
 
 
 @app.route('/logout')
@@ -81,10 +81,22 @@ def navbar():
     return flask.render_template('navbar.html')
 
 
-@app.route('/')
+#add code to display all tasks + form to add new task
+@app.route('/', methods=['GET'])
 @flask_login.login_required
-def index_tasks_reminders():
-    return flask.render_template('tasks_reminders.html', name=flask_login.current_user.username)
+def index_tasks_remindersGET():
+    #call database function to get all tasks
+    #name=flask_login.current_user.username
+    return flask.render_template('tasks_reminders.html')
+
+#once user posts (the form), get all info and add task to database, plus update view to include this new task
+@app.route('/', methods=['POST'])
+@flask_login.login_required
+def index_tasks_remindersPOST():
+    taskInfo = util.getNewTask()
+    print(taskInfo[0])
+    #util.addTask(taskInfo[0],taskInfo[1],flask_login.current_user.username)
+    return flask.redirect(flask.url_for('index_tasks_remindersGET'))
 
 
 @app.route('/calendar')
