@@ -82,3 +82,10 @@ def getTasks(user):
     cur = conn.cursor()
     cur.execute("SELECT * FROM tasks WHERE username = %s", (user,))
     return cur.fetchall()
+
+
+def removeTask(task_id):
+    conn = psycopg2.connect(db_config, sslmode='require')
+    cur = conn.cursor()
+    cur.execute("DELETE FROM tasks WHERE id = %s", (task_id,))
+    conn.commit()
