@@ -93,7 +93,8 @@ def index_tasks_remindersGET():
 @flask_login.login_required
 def index_tasks_remindersPOST():
     taskInfo = util.getNewTask()
-    util.addTask(taskInfo[0], taskInfo[1], flask_login.current_user.username)
+    if taskInfo[0] != '' and taskInfo[1] != '':
+        util.addTask(taskInfo[0], taskInfo[1], flask_login.current_user.username)
     return flask.redirect(flask.url_for('index_tasks_remindersGET'))
 
 
