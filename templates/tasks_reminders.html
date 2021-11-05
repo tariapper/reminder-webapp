@@ -50,8 +50,14 @@
                     <tr>
                         <td>{{ task[3] }}</td>
                         <td>{{ task[2] }}</td>
-                        <td><button>Remove Task</button></td>
-<!--                        <td><button>Remove Task</button></td>-->
+                        <td><form method="POST" action="/removed">
+                            <input type="hidden" name="myTask" value="{{ task[0] }}"/>
+                            <div class="control">
+                                <button class="button">Remove Task</button>
+                            </div>
+                        </form></td>
+
+                        <!--                        <td><button>Remove Task</button></td>-->
                     </tr>
                     {% endfor %}
                     </tbody>
@@ -63,3 +69,5 @@
 </div>
 </body>
 </html>
+
+
