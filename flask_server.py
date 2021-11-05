@@ -21,11 +21,8 @@ login_manager.init_app(app)
 #     import psycopg2
 #     conn = psycopg2.connect(db_config, sslmode='require')
 #     cur = conn.cursor()
-#     cur.execute("DROP TABLE users;")
-#     cur.execute("CREATE TABLE users (username varchar, password varchar);")
-#     conn.commit()
 #
-#     cur.execute("SELECT * FROM users;")
+#     cur.execute("SELECT * FROM tasks;")
 #     data_from_database = cur.fetchall()
 #
 #     print(data_from_database)
@@ -46,7 +43,7 @@ def loginPOST():
 
     user = load_user(username)
     flask_login.login_user(user, remember=True)
-    return flask.redirect(flask.url_for('index_tasks_reminders'))
+    return flask.redirect(flask.url_for('index_tasks_remindersGET'))
 
 
 @app.route('/register', methods=['GET'])
@@ -68,7 +65,7 @@ def registerPOST():
 
     user = load_user(username)
     flask_login.login_user(user, remember=True)
-    return flask.redirect(flask.url_for('index_tasks_reminders'))
+    return flask.redirect(flask.url_for('index_tasks_remindersGET'))
 
 
 @app.route('/logout')
@@ -84,10 +81,29 @@ def navbar():
     return flask.render_template('navbar.html')
 
 
-@app.route('/')
+# add code to display all tasks + form to add new task
+@app.route('/', methods=['GET'])
 @flask_login.login_required
-def index_tasks_reminders():
-    return flask.render_template('tasks_reminders.html', name=flask_login.current_user.username)
+def index_tasks_remindersGET():
+    return flask.render_template('tasks_reminders.html', tasks=util.getTasks(flask_login.current_user.username))
+
+
+# once user posts (the form), get all info and add task to database, plus update view to include this new task
+@app.route('/', methods=['POST'])
+@flask_login.login_required
+def index_tasks_remindersPOST():
+    taskInfo = util.getNewTask()
+    if taskInfo[0] != '' and taskInfo[1] != '':
+        util.addTask(taskInfo[0], taskInfo[1], flask_login.current_user.username)
+    return flask.redirect(flask.url_for('index_tasks_remindersGET'))
+
+
+@app.route('/removed', methods=['POST'])
+@flask_login.login_required
+def index_removed_POST():
+    print(flask.request.form.get("myTask"))
+    util.removeTask(flask.request.form.get("myTask"))
+    return flask.redirect(flask.url_for('index_tasks_remindersGET'))
 
 
 @app.route('/calendar')

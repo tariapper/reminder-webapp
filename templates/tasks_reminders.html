@@ -2,13 +2,14 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
+    <title>Tasks/Reminders</title>
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bulma.min.css') }}">
-    <script type='text/javascript' src="{{ url_for('static', filename= 'script.js') }}"></script>
-    <title>Tasks/Reminders</title>
     <link rel="stylesheet" href="../static/css/bulma.min.css">
     <link rel="stylesheet" href="../static/css/style.css">
-</head>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bulma.min.css">
+
+
 <body>
 <!--
 <div class="navbar">
@@ -23,23 +24,52 @@
     <div class="tile is-ancestor">
         <div class="tile is-parent is-vertical">
             <div class="tile is-child box">
-                <input class="input" type="text" placeholder="Add task" id="new_task">
-            </div>
-            <br>
-            <br>
-
-            <div class="tile is-child box">
-                <span class="tag is-primary is-light is-medium">October 14, 2021</span>
-                <span class="tag is-danger is-light">sample group</span>
-                <span class="tag is-info is-light">sample group2</span>
-                <p class="subtitle">Do task.</p>
+                <form method="POST" action="/">
+                    <input class="input" type="text" placeholder="Add task" name="new_task">
+                    <input class="input" type="date" name="deadline">
+                    <div class="control">
+                        <button class="button">Add task</button>
+                    </div>
+                </form>
             </div>
             <div class="tile is-child box">
-                <p class="tile"> username: {{ name }}</p>
-            </div>
+                <table id="data" class="table is-striped wrap" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Deadline</th>
+                        <th>Task</th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td>{{ task[3] }}</td>
+                        <td>{{ task[2] }}</td>
+                        <td><form method="POST" action="/removed">
+                            <input type="hidden" name="myTask" value="{{ task[0] }}"/>
+                            <div class="control">
+                                <button class="button">Remove Task</button>
+                            </div>
+                        </form></td>
 
+                        <!--                        <td><button>Remove Task</button></td>-->
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+</head>
+                <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/dataTables.bulma.min.js"></script>
+                <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+                <script src="https://cdn.datatables.net/plug-ins/1.10.21/dataRender/datetime.js"></script>
+                <script type='text/javascript' src="{{ url_for('static', filename= 'script.js') }}"></script>
+            </div>
         </div>
     </div>
 </div>
 </body>
 </html>
+
+
