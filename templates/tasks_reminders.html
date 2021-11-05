@@ -31,11 +31,24 @@
                     </div>
                 </form>
             </div>
-            {%  for task in tasks %}
-                <div class="tile is-child box">
-                    {{ task[0], task[1] }}
-                </div>
-            {% endfor %}
+            {% block content %}
+            <table id="data" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Deadline</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task[0] }}</td>
+                    <td>{{ task[1] }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endblock %}
             <br>
             <br>
         </div>
