@@ -9,11 +9,7 @@
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bulma.min.css">
 
-    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/dataTables.bulma.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js"></script>
-</head>
+
 <body>
 <!--
 <div class="navbar">
@@ -62,6 +58,12 @@
                     {% endfor %}
                     </tbody>
                 </table>
+</head>
+                <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/dataTables.bulma.min.js"></script>
+                <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+                <script src="https://cdn.datatables.net/plug-ins/1.10.21/dataRender/datetime.js"></script>
                 <script type='text/javascript' src="{{ url_for('static', filename= 'script.js') }}"></script>
             </div>
         </div>

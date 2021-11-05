@@ -96,11 +96,14 @@ def index_tasks_remindersPOST():
     util.addTask(taskInfo[0], taskInfo[1], flask_login.current_user.username)
     return flask.redirect(flask.url_for('index_tasks_remindersGET'))
 
+
 @app.route('/removed', methods=['POST'])
 @flask_login.login_required
 def index_removed_POST():
     print(flask.request.form.get("myTask"))
+    util.removeTask(flask.request.form.get("myTask"))
     return flask.redirect(flask.url_for('index_tasks_remindersGET'))
+
 
 @app.route('/calendar')
 @flask_login.login_required
