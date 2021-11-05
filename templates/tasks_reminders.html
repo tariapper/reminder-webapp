@@ -2,14 +2,17 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
+    <title>Tasks/Reminders</title>
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bulma.min.css') }}">
-    <script type='text/javascript' src="{{ url_for('static', filename= 'script.js') }}"></script>
-    <title>Tasks/Reminders</title>
     <link rel="stylesheet" href="../static/css/bulma.min.css">
     <link rel="stylesheet" href="../static/css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bulma.min.css">
+
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/dataTables.bulma.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js"></script>
 </head>
 <body>
 <!--
@@ -27,45 +30,31 @@
             <div class="tile is-child box">
                 <form method="POST" action="/">
                     <input class="input" type="text" placeholder="Add task" name="new_task">
-                    <input class="input" type="date" placeholder="Deadline" name="deadline">
+                    <input class="input" type="date" name="deadline">
                     <div class="control">
                         <button class="button">Add task</button>
                     </div>
                 </form>
             </div>
-            {% block content %}
-            <table id="data" class="table table-striped wrap">
-                <thead>
-                <tr>
-                    <th>Task</th>
-                    <th>Deadline</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for task in tasks %}
-                <tr>
-                    <td>{{ task[0] }}</td>
-                    <td>{{ task[1] }}</td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-            {% endblock %}
-
-            <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
-
-            {% block scripts %}
-            <script>
-            $(document).ready(function () {
-            $('#data').DataTable();
-            });
-            </script>
-            {% endblock %}
-
-            <br>
-            <br>
+            <div class="tile is-child box">
+                <table id="data" class="table is-striped wrap" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Deadline</th>
+                        <th>Task</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td>{{ task[3] }}</td>
+                        <td>{{ task[2] }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <script type='text/javascript' src="{{ url_for('static', filename= 'script.js') }}"></script>
+            </div>
         </div>
     </div>
 </div>

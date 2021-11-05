@@ -60,8 +60,25 @@ def loginUser():
             return user[0]
     return False
 
+
 def getNewTask():
     """
     @return: returns a tuple containing task info from frontend
     """
-    return request.form.get('new_task'),request.form.get('deadline')
+    return request.form.get('new_task'), request.form.get('deadline')
+
+
+def addTask(task, deadline, user):
+    conn = psycopg2.connect(db_config, sslmode='require')
+    cur = conn.cursor()
+    cur.execute(
+        "CREATE TABLE IF NOT EXISTS tasks (id SERIAL PRIMARY KEY, username VARCHAR, task VARCHAR, deadline DATE)")
+    cur.execute("INSERT INTO tasks (username, task, deadline) VALUES (%s, %s, %s)", (user, task, deadline))
+    conn.commit()
+
+
+def getTasks(user):
+    conn = psycopg2.connect(db_config, sslmode='require')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM tasks WHERE username = %s", (user,))
+    return cur.fetchall()

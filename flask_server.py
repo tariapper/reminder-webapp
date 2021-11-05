@@ -22,7 +22,7 @@ def index2():
     conn = psycopg2.connect(db_config, sslmode='require')
     cur = conn.cursor()
 
-    cur.execute("SELECT * FROM users;")
+    cur.execute("SELECT * FROM tasks;")
     data_from_database = cur.fetchall()
 
     print(data_from_database)
@@ -81,22 +81,19 @@ def navbar():
     return flask.render_template('navbar.html')
 
 
-#add code to display all tasks + form to add new task
+# add code to display all tasks + form to add new task
 @app.route('/', methods=['GET'])
 @flask_login.login_required
 def index_tasks_remindersGET():
-    #call database function to get all tasks
-    #name=flask_login.current_user.username
-    tasks = [("testfkjhfkjdsfhdskjfhdskjhfdskjfhdskjfhdfkjdshdkjhfsjdhdksjfhdkjlfhdkjshfkjdshftestfkjhfkjdsfhdskjfhdskjhfdskjfhdskjfhdfkjdshdkjhfsjdhdksjfhdkjlfhdkjshfkjdshftestfkjhfkjdsfhdskjfhdskjhfdskjfhdskjfhdfkjdshdkjhfsjdhdksjfhdkjlfhdkjshfkjdshftestfkjhfkjdsfhdskjfhdskjhfdskjfhdskjfhdfkjdshdkjhfsjdhdksjfhdkjlfhdkjshfkjdshftestfkjhfkjdsfhdskjfhdskjhfdskjfhdskjfhdfkjdshdkjhfsjdhdksjfhdkjlfhdkjshfkjdshf", "1234"), ("tesst", "234")]
-    return flask.render_template('tasks_reminders.html', tasks=tasks)
+    return flask.render_template('tasks_reminders.html', tasks=util.getTasks(flask_login.current_user.username))
 
-#once user posts (the form), get all info and add task to database, plus update view to include this new task
+
+# once user posts (the form), get all info and add task to database, plus update view to include this new task
 @app.route('/', methods=['POST'])
 @flask_login.login_required
 def index_tasks_remindersPOST():
     taskInfo = util.getNewTask()
-    print(taskInfo)
-    #util.addTask(taskInfo[0],taskInfo[1],flask_login.current_user.username)
+    util.addTask(taskInfo[0], taskInfo[1], flask_login.current_user.username)
     return flask.redirect(flask.url_for('index_tasks_remindersGET'))
 
 
