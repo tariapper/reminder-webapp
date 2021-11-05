@@ -87,14 +87,15 @@ def navbar():
 def index_tasks_remindersGET():
     #call database function to get all tasks
     #name=flask_login.current_user.username
-    return flask.render_template('tasks_reminders.html')
+    tasks = [("test", "1234"), ("tesst", "234")]
+    return flask.render_template('tasks_reminders.html', tasks=tasks)
 
 #once user posts (the form), get all info and add task to database, plus update view to include this new task
 @app.route('/', methods=['POST'])
 @flask_login.login_required
 def index_tasks_remindersPOST():
     taskInfo = util.getNewTask()
-    print(taskInfo[0])
+    print(taskInfo)
     #util.addTask(taskInfo[0],taskInfo[1],flask_login.current_user.username)
     return flask.redirect(flask.url_for('index_tasks_remindersGET'))
 
