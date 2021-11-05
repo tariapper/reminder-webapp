@@ -1,7 +1,9 @@
 $(document).ready(function () {
-    $('#data').DataTable();
-});
-
+      $('#data').DataTable({
+        "searching": true,
+        columns: [{"width":"20%", orderable: true, searchable: false},{"width":"70%",orderable: false, searchable: true},{"width":"10%", orderable: false, searchable: false}],
+      });
+    });
 
 
 
