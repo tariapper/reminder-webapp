@@ -87,7 +87,7 @@ def navbar():
 def index_tasks_remindersGET():
     #call database function to get all tasks
     #name=flask_login.current_user.username
-    tasks = [("test", "1234"), ("tesst", "234")]
+    tasks = [("testfkjhfkjdsfhdskjfhdskjhfdskjfhdskjfhdfkjdshdkjhfsjdhdksjfhdkjlfhdkjshfkjdshftestfkjhfkjdsfhdskjfhdskjhfdskjfhdskjfhdfkjdshdkjhfsjdhdksjfhdkjlfhdkjshfkjdshftestfkjhfkjdsfhdskjfhdskjhfdskjfhdskjfhdfkjdshdkjhfsjdhdksjfhdkjlfhdkjshfkjdshftestfkjhfkjdsfhdskjfhdskjhfdskjfhdskjfhdfkjdshdkjhfsjdhdksjfhdkjlfhdkjshfkjdshftestfkjhfkjdsfhdskjfhdskjhfdskjfhdskjfhdfkjdshdkjhfsjdhdksjfhdkjlfhdkjshfkjdshf", "1234"), ("tesst", "234")]
     return flask.render_template('tasks_reminders.html', tasks=tasks)
 
 #once user posts (the form), get all info and add task to database, plus update view to include this new task
