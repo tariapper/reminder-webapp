@@ -7,13 +7,32 @@
     <title>Tasks/Reminders</title>
 </head>
 <body>
-    <div class="navbar">
-        <ul>
-            <li><a href="https://reminder-webapp.herokuapp.com/tasks-reminders">Tasks/Reminders</a></li>
-            <li><a href="https://reminder-webapp.herokuapp.com/calendar">Calendar</a></li>
-            <li><a href="https://reminder-webapp.herokuapp.com/settings">Settings</a></li>
-        </ul>
-    </div>
+    <nav class="navbar" role="navigation" aria-label="main navigation"> 
+        <div class="navbar-brand">
+            <a class="navbar-item ">
+                <!--Make logo not distorted vertically https://github.com/jgthms/bulma/issues/305, 
+                    $navbar-item-img-max-height changed from 1.75 to 12.5 in bulma.min.css 
+                    crtl + f: .navbar-item img{max-height:12.5rem} -->
+                <img src="../static/images/logo.png" width="100" height="100"> 
+            </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="/tasks_reminders">
+                    Tasks/Reminders
+                </a>
+                <a class="navbar-item" href="/calendar">
+                    Calendar
+                </a>
+                <a class="navbar-item" href="/settings">
+                    Settings
+                </a>
+            </div>
+            <div class="navbar-end">
+                <a class="navbar-item" href="/logout">Logout</a>
+            </div>
+        </div>
+    </nav>
     <p>Temporary page for the calendar webpage.</p>
 </body>
 </html>
