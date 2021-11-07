@@ -2,6 +2,8 @@
 @import "bulma.min.css";
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css";
 
+// I had to remove the a element because it didn't make the calendar show up
+
 html {
     background-color: #2148C0;
 }
@@ -21,10 +23,6 @@ html {
 
 .tasks {
     padding-top: 2.5%;
-}
-
-a {
-    color: whitesmoke;
 }
 
 .login {
