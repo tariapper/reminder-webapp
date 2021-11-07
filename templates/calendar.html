@@ -2,12 +2,26 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
+    <script type='text/javascript' src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <script type='text/javascript' src="{{ url_for('static', filename= 'script.js') }}"></script>
-    <title>Tasks/Reminders</title>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                aspectRatio: 2,
+            });
+            calendar.render();
+        });
+  
+      </script>
+    <title>Calendar</title>
 </head>
 <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation"> 
+    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation"> 
         <div class="navbar-brand">
             <a class="navbar-item ">
                 <!--Make logo not distorted vertically https://github.com/jgthms/bulma/issues/305, 
@@ -33,6 +47,20 @@
             </div>
         </div>
     </nav>
-    <p>Temporary page for the calendar webpage.</p>
+    <div class="columns">
+        <div class="column is-2">
+            <div class="box mt-2 py-2">
+                <p class="subtitle"> testing bro </p>
+            </div>
+        </div>
+        <div class="column" id="column-calendar">
+            <div id='calendar'></div>
+        </div>
+    </div>
+    <!-- # Bulma calendar relic
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-calendar@6.0.7/dist/css/bulma-calendar.min.css">
+    <script type='text/javascript' src="https://cdn.jsdelivr.net/npm/bulma-calendar@6.0.7/dist/js/bulma-calendar.min.js"></script>
+    <script type='text/javascript' src="{{ url_for('static', filename= 'calendar.js') }}"></script> 
+    -->
 </body>
 </html>

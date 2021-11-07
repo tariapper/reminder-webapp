@@ -2,7 +2,6 @@
 @import "bulma.min.css";
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css";
 
-
 html {
     background-color: #2148C0;
 }
@@ -34,3 +33,17 @@ a {
     color: whitesmoke;
 }
 
+.columns.is-fullheight {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+  
+    .column {
+      overflow-y: auto;
+    }
+  }
+
+#column-calendar {
+    background-color: #f3f6f8;
+}
