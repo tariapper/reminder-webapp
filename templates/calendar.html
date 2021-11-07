@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <script type='text/javascript' src="{{ url_for('static', filename= 'script.js') }}"></script>
-    <title>Tasks/Reminders</title>
+    <title>Reminder - Calendar</title>
 </head>
 <body>
     <nav class="navbar" role="navigation" aria-label="main navigation"> 
         <div class="navbar-brand">
-            <a class="navbar-item ">
+            <a class="navbar-item" href="/">
                 <!--Make logo not distorted vertically https://github.com/jgthms/bulma/issues/305, 
                     $navbar-item-img-max-height changed from 1.75 to 12.5 in bulma.min.css 
                     crtl + f: .navbar-item img{max-height:12.5rem} -->
@@ -19,7 +19,7 @@
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
                 <a class="navbar-item" href="/">
-                    Tasks/Reminders
+                    Tasks
                 </a>
                 <a class="navbar-item" href="/calendar">
                     Calendar
@@ -33,6 +33,6 @@
             </div>
         </div>
     </nav>
-    <p>Temporary page for the calendar webpage.</p>
+    <p>Stay Tuned! We are working towards adding a monthly calendar view for all of your tasks</p>
 </body>
 </html>
