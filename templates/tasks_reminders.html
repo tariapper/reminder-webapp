@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title>Tasks/Reminders</title>
+    <title>Reminder - Tasks</title>
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bulma.min.css') }}">
     <link rel="stylesheet" href="../static/css/bulma.min.css">
@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar" role="navigation" aria-label="main navigation"> 
         <div class="navbar-brand">
-            <a class="navbar-item ">
+            <a class="navbar-item" href="/">
                 <!--Make logo not distorted vertically https://github.com/jgthms/bulma/issues/305, 
                     $navbar-item-img-max-height changed from 1.75 to 12.5 in bulma.min.css 
                     crtl + f: .navbar-item img{max-height:12.5rem} -->
@@ -21,8 +21,8 @@
         </div>
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="/tasks_reminders">
-                    Tasks/Reminders
+                <a class="navbar-item" href="/">
+                    Tasks
                 </a>
                 <a class="navbar-item" href="/calendar">
                     Calendar
@@ -41,10 +41,11 @@
         <div class="tile is-parent is-vertical">
             <div class="tile is-child box">
                 <form method="POST" action="/">
-                    <input class="input" type="text" placeholder="Add task" name="new_task">
-                    <input class="input" type="date" name="deadline">
+                    <textarea class="textarea" placeholder="Add Task" name="new_task"></textarea>
+                    <!--<input class="input" type="text" placeholder="Add task" name="new_task" style="width: 100%; height: 100px;">-->
+                    <input class="input" type="date" name="deadline" placeholder="Deadline">
                     <div class="control">
-                        <button class="button">Add task</button>
+                        <button class="button">Add Task</button>
                     </div>
                 </form>
             </div>
@@ -65,10 +66,9 @@
                         <td><form method="POST" action="/removed">
                             <input type="hidden" name="myTask" value="{{ task[0] }}"/>
                             <div class="control">
-                                <button class="button">Remove Task</button>
+                                <button class="button b1">Remove Task</button>
                             </div>
                         </form></td>
-                        <!--                        <td><button>Remove Task</button></td>-->
 
                     </tr>
                     {% endfor %}
