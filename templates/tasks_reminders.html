@@ -2,42 +2,85 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
+    <title>Reminder - Tasks</title>
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bulma.min.css') }}">
-    <script type='text/javascript' src="{{ url_for('static', filename= 'script.js') }}"></script>
-    <title>Tasks/Reminders</title>
     <link rel="stylesheet" href="../static/css/bulma.min.css">
     <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bulma.min.css">
 </head>
 <body>
-<!--
-<div class="navbar">
-    <ul>
-        <li><a href="https://reminder-webapp.herokuapp.com/tasks-reminders">Tasks/Reminders</a></li>
-        <li><a href="https://reminder-webapp.herokuapp.com/calendar">Calendar</a></li>
-        <li><a href="https://reminder-webapp.herokuapp.com/settings">Settings</a></li>
-    </ul>
-</div>!-->
-<a href="/logout">Logout</a>
+    <nav class="navbar" role="navigation" aria-label="main navigation"> 
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <!--Make logo not distorted vertically https://github.com/jgthms/bulma/issues/305, 
+                    $navbar-item-img-max-height changed from 1.75 to 12.5 in bulma.min.css 
+                    crtl + f: .navbar-item img{max-height:12.5rem} -->
+                <img src="../static/images/logo.png" width="100" height="100"> 
+            </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="/">
+                    Tasks
+                </a>
+                <a class="navbar-item" href="/calendar">
+                    Calendar
+                </a>
+                <a class="navbar-item" href="/settings">
+                    Settings
+                </a>
+            </div>
+            <div class="navbar-end">
+                <a class="navbar-item" href="/logout">Logout</a>
+            </div>
+        </div>
+    </nav>
 <div class="container tasks">
     <div class="tile is-ancestor">
         <div class="tile is-parent is-vertical">
             <div class="tile is-child box">
-                <input class="input" type="text" placeholder="Add task" id="new_task">
-            </div>
-            <br>
-            <br>
-
-            <div class="tile is-child box">
-                <span class="tag is-primary is-light is-medium">October 14, 2021</span>
-                <span class="tag is-danger is-light">sample group</span>
-                <span class="tag is-info is-light">sample group2</span>
-                <p class="subtitle">Do task.</p>
+                <form method="POST" action="/">
+                    <textarea class="textarea" placeholder="Add Task" name="new_task"></textarea>
+                    <!--<input class="input" type="text" placeholder="Add task" name="new_task" style="width: 100%; height: 100px;">-->
+                    <input class="input" type="date" name="deadline" placeholder="Deadline">
+                    <div class="control">
+                        <button class="button">Add Task</button>
+                    </div>
+                </form>
             </div>
             <div class="tile is-child box">
-                <p class="tile"> username: {{ name }}</p>
-            </div>
+                <table id="data" class="table is-striped wrap" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Deadline</th>
+                        <th>Task</th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td>{{ task[3] }}</td>
+                        <td>{{ task[2] }}</td>
+                        <td><form method="POST" action="/removed">
+                            <input type="hidden" name="myTask" value="{{ task[0] }}"/>
+                            <div class="control">
+                                <button class="button b1">Remove Task</button>
+                            </div>
+                        </form></td>
 
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/dataTables.bulma.min.js"></script>
+                <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+                <script src="https://cdn.datatables.net/plug-ins/1.10.21/dataRender/datetime.js"></script>
+                <script type='text/javascript' src="{{ url_for('static', filename= 'script.js') }}"></script>
+            </div>
         </div>
     </div>
 </div>
