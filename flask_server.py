@@ -1,9 +1,11 @@
 # https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3
 import os
 import sys
+from types import MethodType
 import flask
 import flask_login
 import util
+import json
 
 app = flask.Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
@@ -106,10 +108,97 @@ def index_removed_POST():
     return flask.redirect(flask.url_for('index_tasks_remindersGET'))
 
 
-@app.route('/calendar')
+# BAD SOFTWARE PRACTICE ZONE
+# NO ENTRY
+e = []
+class fooUser:
+    def __init__(self, username):
+        self.username = username
+        self.events = []
+        
+    def __eq__(self, o):
+        return self.username == o.username
+    
+    def addTasks(self, tasks):
+        self.events.append(tasks)
+    
+    def removeTasks(self, tasks, title):
+        l = len(self.events)
+        i = 0
+        while i < l:
+            if self.events[0] == title:
+                del self.events[i]
+                return
+            i += 1
+    
+    def getTasks(self):
+        return self.events
+
+def foogetTasks(user):
+    return e
+
+
+# once user adds task from calendar, add to database.
+@app.route('/calendar', methods=['POST'])
 @flask_login.login_required
-def index_calendar():
-    return flask.render_template('calendar.html')
+def index_calendarPOST():
+    a = flask.request.data
+    temp = json.loads(a)
+    bruh = temp['bruh']
+    if bruh == 1:
+        e.append((1, 'foo', temp['title'], temp['start']))
+    elif bruh == 2:
+        l = len(e)
+        i = 0
+        title = temp['title']
+        while i < l:
+            if e[i][2] == title:
+                del e[i]
+                break
+
+    return flask.redirect('/calendar')
+    # taskInfo = util.getNewTask()
+    # if taskInfo[0] != '' and taskInfo[1] != '':
+    #     util.addTask(taskInfo[0], taskInfo[1], flask_login.current_user.username)
+    # return flask.redirect(flask.url_for('index_calendarGET'))
+
+@app.route('/calendar')
+def calendar():
+    DEBUG = 1 > 0
+    if DEBUG:
+        username = 'foo'
+        gtf = foogetTasks
+    else:
+        from util import getTasks
+        username = flask_login.current_user.username
+        gtf = getTasks
+    tmplt = "{title: '%s', start: '%s', allDay: true, id: '%s'}"
+
+    s = '['
+
+    # task is a tuple in the form of (id, username, task, ddl)
+    for i in e:
+        s += tmplt % (i[2], str(i[3]), i[2]) + ','
+
+    s += ']'
+    print('in ctrl')
+    return flask.render_template('calendar.html', event = s)
+##### END OF THE BAD SFTWR PRCTC ZONE
+
+# display tasks in calendar form
+@app.route('/calendar', methods=['GET'])
+@flask_login.login_required
+def index_calendarGET():
+    return flask.render_template('calendar.html', tasks=util.getTasks(flask_login.current_user.username))
+
+
+
+@app.route('/calendar_removed', methods=['POST'])
+@flask_login.login_required
+def index_calendar_removed_POST():
+    print(flask.request.form.get("myTask"))
+    util.removeTask(flask.request.form.get("myTask"))
+    return flask.redirect(flask.url_for('index_calendarGET'))
 
 
 @app.route('/settings')

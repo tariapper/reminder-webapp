@@ -3,21 +3,9 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
-    <script type='text/javascript' src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <script type='text/javascript' src="{{ url_for('static', filename= 'script.js') }}"></script>
-    <script>
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                aspectRatio: 2,
-            });
-            calendar.render();
-        });
-  
-      </script>
+    
     <title>Calendar</title>
 </head>
 <body>
@@ -32,7 +20,7 @@
         </div>
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="/tasks_reminders">
+                <a class="navbar-item" href="/">
                     Tasks/Reminders
                 </a>
                 <a class="navbar-item" href="/calendar">
@@ -57,10 +45,121 @@
             <div id='calendar'></div>
         </div>
     </div>
-    <!-- # Bulma calendar relic
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-calendar@6.0.7/dist/css/bulma-calendar.min.css">
-    <script type='text/javascript' src="https://cdn.jsdelivr.net/npm/bulma-calendar@6.0.7/dist/js/bulma-calendar.min.js"></script>
-    <script type='text/javascript' src="{{ url_for('static', filename= 'calendar.js') }}"></script> 
-    -->
+    <div class="ghost">
+        <form method="POST" action="/calendar" id="form">
+            <textarea class="textarea" placeholder="Add Task" name="new_task" id="new_task"></textarea>
+            <input class="input" type="date" name="deadline" placeholder="Deadline" id="deadline">
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <script>
+        function sendAddToServer(title, date) {
+            var data = {
+                bruh: 1,
+                title: title,
+                start: date
+            };
+            var dataStr = JSON.stringify(data);
+            const URL = '/calendar'
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', URL);
+            xhr.send(dataStr);
+        }
+
+        function sendRemoveToServer(title) {
+            var data = {
+                bruh: 2,
+                title: title,
+            };
+            var dataStr = JSON.stringify(data);
+            const URL = '/calendar'
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', URL);
+            xhr.send(dataStr);
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            // var events = [];
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                aspectRatio: 2,
+                events: {{ event|safe }},
+                headerToolbar: {
+                    center: 'addEventButton'
+                },
+                eventClick: function(info) {
+                    var eventObj = info.event;
+                    if (eventObj.url) {
+                        // url exist, which we don't handle right now.
+                        alert(
+                            'Clicked ' + eventObj.title + '.\n' +
+                            'Will open ' + eventObj.url + ' in a new tab'
+                        );
+                
+                        window.open(eventObj.url);
+                
+                        info.jsEvent.preventDefault(); // prevents browser from following link in current tab.
+                    } else {
+                        var oldId = eventObj.id;
+                        // do something here. 
+                        var title = prompt('Please enter a new title for this event.');
+                        var dateStr = prompt('Enter a date in YYYY-MM-DD format');
+                        var date = new Date(dateStr + 'T00:00:00'); // will be in local time
+                        if (!isNaN(date.valueOf())) { // valid?
+                            var oldObj = calendar.getEventById( oldId );
+                            var oldTitle = oldObj.title
+
+                            // remove old event
+
+                            oldObj.remove();
+
+                            // add new event
+                            calendar.addEvent({
+                                title: title,
+                                start: date,
+                                allDay: true, 
+                                id: title
+                            });
+                        
+                            alert('you updated to a new event!');
+                            sendAddToServer(title, date);
+                        } else {
+                            alert('Invalid date.');
+                        }
+                    }
+                },
+
+                customButtons: {
+                    addEventButton: {
+                        // here controls the behavior of addevent button
+                        text: 'add event...',
+                        click: function bar() {
+                            var title = prompt('Please enter the title of the event.')
+                            var dateStr = prompt('Enter a date in YYYY-MM-DD format');
+                            var date = new Date(dateStr + 'T00:00:00'); // will be in local time
+                            if (!isNaN(date.valueOf())) { // valid?
+                                // send the data to server.
+                                
+                                
+                                // add event locally
+                                calendar.addEvent({
+                                    title: title,
+                                    start: date,
+                                    allDay: true,
+                                    id: title,
+                                });
+                                alert('you added an event!');
+                                sendAddToServer(title, date);
+                            } else {
+                                alert('Invalid date.');
+                            }
+                        }
+                    }
+                }
+            },);
+            
+            calendar.render();
+        });
+    </script>
 </body>
 </html>
