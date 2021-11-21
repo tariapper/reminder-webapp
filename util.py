@@ -1,5 +1,5 @@
 import os
-from flask import request
+from flask import request, flash
 import psycopg2
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -89,3 +89,39 @@ def removeTask(task_id):
     cur = conn.cursor()
     cur.execute("DELETE FROM tasks WHERE id = %s", (task_id,))
     conn.commit()
+
+
+def getNewPassword():
+    old, new, new2 = request.form.get('old'), request.form.get('new'), request.form.get('new2')
+    if old and new and new2 is not None:
+        return old, new, new2
+    return None
+
+
+def getPasswordHash(username):
+    conn = psycopg2.connect(db_config, sslmode='require')
+    cur = conn.cursor()
+    cur.execute("SELECT password FROM users WHERE username = %s", (username,))
+    return cur.fetchone()[0]
+
+
+def updatePassword(username, password):
+    conn = psycopg2.connect(db_config, sslmode='require')
+    cur = conn.cursor()
+    cur.execute("UPDATE users SET password = %s WHERE username = %s", (generate_password_hash(password), username,))
+    conn.commit()
+
+
+def changePassword(username):
+    password = getNewPassword()
+    if password is not None:
+        if password[1] == password[2]:
+            if check_password_hash(getPasswordHash(username), password[0]):
+                updatePassword(username, password[1])
+                flash("Password updated.")
+            else:
+                flash("Original password incorrect.")
+        else:
+            flash("New password does not match.")
+    else:
+        flash("Password cannot be empty.")
