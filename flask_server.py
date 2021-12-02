@@ -123,7 +123,7 @@ def index_calendarPOST():
 @flask_login.login_required
 def index_calendar():
     tmplt = "{title: '%s', start: '%s', allDay: true, id: '%s'}"
-    e = util.getTask(flask_login.current_user.username)
+    e = util.getTasks(flask_login.current_user.username)
     s = '['
 
     # task is a tuple in the form of (id, username, task, ddl)
