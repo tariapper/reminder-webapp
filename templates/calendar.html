@@ -5,17 +5,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <script type='text/javascript' src="{{ url_for('static', filename= 'script.js') }}"></script>
-    
+
     <title>Calendar</title>
 </head>
 <body>
-    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation"> 
+    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item ">
-                <!--Make logo not distorted vertically https://github.com/jgthms/bulma/issues/305, 
-                    $navbar-item-img-max-height changed from 1.75 to 12.5 in bulma.min.css 
+                <!--Make logo not distorted vertically https://github.com/jgthms/bulma/issues/305,
+                    $navbar-item-img-max-height changed from 1.75 to 12.5 in bulma.min.css
                     crtl + f: .navbar-item img{max-height:12.5rem} -->
-                <img src="../static/images/logo.png" width="100" height="100"> 
+                <img src="../static/images/logo.png" width="100" height="100">
             </a>
         </div>
         <div id="navbarBasicExample" class="navbar-menu">
@@ -38,7 +38,7 @@
     <div class="columns">
         <div class="column is-2">
             <div class="box mt-2 ml-2">
-                <p class="subtitle"> testing bro </p>
+                <p class="subtitle"> Calendar </p>
             </div>
         </div>
         <div class="column" id="column-calendar">
@@ -95,69 +95,69 @@
                             'Clicked ' + eventObj.title + '.\n' +
                             'Will open ' + eventObj.url + ' in a new tab'
                         );
-                
+
                         window.open(eventObj.url);
-                
+
                         info.jsEvent.preventDefault(); // prevents browser from following link in current tab.
                     } else {
-                        var oldId = eventObj.id;
-                        // do something here. 
-                        var title = prompt('Please enter a new title for this event.');
-                        var dateStr = prompt('Enter a date in YYYY-MM-DD format');
-                        var date = new Date(dateStr + 'T00:00:00'); // will be in local time
-                        if (!isNaN(date.valueOf())) { // valid?
-                            var oldObj = calendar.getEventById( oldId );
-                            var oldTitle = oldObj.title
+                        // var oldId = eventObj.id;
+                        // // do something here.
+                        // var title = prompt('Please enter a new title for this event.');
+                        // var dateStr = prompt('Enter a date in YYYY-MM-DD format');
+                        // var date = new Date(dateStr + 'T00:00:00'); // will be in local time
+                        // if (!isNaN(date.valueOf())) { // valid?
+                        //     var oldObj = calendar.getEventById( oldId );
+                        //     var oldTitle = oldObj.title
 
-                            // remove old event
+                        //     // remove old event
 
-                            oldObj.remove();
+                        //     oldObj.remove();
 
-                            // add new event
-                            calendar.addEvent({
-                                title: title,
-                                start: date,
-                                allDay: true, 
-                                id: title
-                            });
-                        
-                            alert('you updated to a new event!');
-                            sendAddToServer(title, date);
+                        //     // add new event
+                        //     calendar.addEvent({
+                        //         title: title,
+                        //         start: date,
+                        //         allDay: true,
+                        //         id: title
+                        //     });
+
+                        //     alert('you updated to a new event!');
+                        //     sendAddToServer(title, date);
                         } else {
                             alert('Invalid date.');
                         }
                     }
                 },
 
-                customButtons: {
-                    addEventButton: {
-                        // here controls the behavior of addevent button
-                        text: 'add event...',
-                        click: function bar() {
-                            var title = prompt('Please enter the title of the event.')
-                            var dateStr = prompt('Enter a date in YYYY-MM-DD format');
-                            var date = new Date(dateStr + 'T00:00:00'); // will be in local time
-                            if (!isNaN(date.valueOf())) { // valid?
-                                // send the data to server.
-                                
-                                
-                                // add event locally
-                                calendar.addEvent({
-                                    title: title,
-                                    start: date,
-                                    allDay: true,
-                                    id: title,
-                                });
-                                alert('you added an event!');
-                                sendAddToServer(title, date);
-                            } else {
-                                alert('Invalid date.');
-                            }
-                        }
-                    }
-                }
+                // customButtons: {
+                //     addEventButton: {
+                //         // here controls the behavior of addevent button
+                //         text: 'add event...',
+                //         click: function bar() {
+                //             var title = prompt('Please enter the title of the event.')
+                //             var dateStr = prompt('Enter a date in YYYY-MM-DD format');
+                //             var date = new Date(dateStr + 'T00:00:00'); // will be in local time
+                //             if (!isNaN(date.valueOf())) { // valid?
+                //                 // send the data to server.
+
+
+                //                 // add event locally
+                //                 calendar.addEvent({
+                //                     title: title,
+                //                     start: date,
+                //                     allDay: true,
+                //                     id: title,
+                //                 });
+                //                 alert('you added an event!');
+                //                 sendAddToServer(title, date);
+                //             } else {
+                //                 alert('Invalid date.');
+                //             }
+                //         }
+                //     }
+                // }
             },);
-            
+
             calendar.render();
         });
     </script>
