@@ -135,9 +135,16 @@ def index_calendar():
     return flask.render_template('calendar.html', event = s)
 
 
-@app.route('/settings')
+@app.route('/settings',  methods=['GET'])
 @flask_login.login_required
-def index_settings():
+def settings_GET():
+    return flask.render_template('settings.html')
+
+
+@app.route('/settings', methods=['POST'])
+@flask_login.login_required
+def settings_POST():
+    util.changePassword(flask_login.current_user.username)
     return flask.render_template('settings.html')
 
 

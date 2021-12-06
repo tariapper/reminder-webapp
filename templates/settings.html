@@ -4,35 +4,74 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <script type='text/javascript' src="{{ url_for('static', filename= 'script.js') }}"></script>
-    <title>Settings</title>
+    <title>Reminder - Settings</title>
 </head>
 <body>
-    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
+<nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <!--Make logo not distorted vertically https://github.com/jgthms/bulma/issues/305,
+                $navbar-item-img-max-height changed from 1.75 to 12.5 in bulma.min.css
+                crtl + f: .navbar-item img{max-height:12.5rem} -->
+            <img src="../static/images/logo.png" width="100" height="100">
+        </a>
+    </div>
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
             <a class="navbar-item" href="/">
-                <!--Make logo not distorted vertically https://github.com/jgthms/bulma/issues/305, 
-                    $navbar-item-img-max-height changed from 1.75 to 12.5 in bulma.min.css 
-                    crtl + f: .navbar-item img{max-height:12.5rem} -->
-                <img src="../static/images/logo.png" width="100" height="100"> 
+                Tasks
+            </a>
+            <a class="navbar-item" href="/calendar">
+                Calendar
+            </a>
+            <a class="navbar-item" href="/settings">
+                Settings
             </a>
         </div>
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item" href="/">
-                    Tasks
-                </a>
-                <a class="navbar-item" href="/calendar">
-                    Calendar
-                </a>
-                <a class="navbar-item" href="/settings">
-                    Settings
-                </a>
-            </div>
-            <div class="navbar-end">
-                <a class="navbar-item" href="/logout">Logout</a>
-            </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="/logout">Logout</a>
         </div>
-    </nav>
-    <p>Stay Tuned! We are working towards adding a settings page for all of your account management needs</p>
+    </div>
+</nav>
+<div class="register">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <div>
+        <form method="POST" action="/settings">
+            <div class="field">
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input" type="password" name="old" placeholder="Old password">
+                    <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+                </div>
+            </div>
+            <div class="field">
+                <p class="control has-icons-left">
+                    <input class="input" type="password" name="new" placeholder="New password">
+                    <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control has-icons-left">
+                    <input class="input" type="password" name="new2" placeholder="Confirm new password">
+                    <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+                </p>
+            </div>
+            <div class="control">
+                <button class="button login">Change password</button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
