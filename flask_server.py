@@ -106,10 +106,33 @@ def index_removed_POST():
     return flask.redirect(flask.url_for('index_tasks_remindersGET'))
 
 
+@app.route('/calendar', methods=['POST'])
+def index_calendarPOST():
+    import json
+    a = flask.request.data
+    temp = json.loads(a)
+    bruh = temp['bruh']
+    if bruh == 1:
+        util.addTask(temp['title'], temp['start'], flask_login.current_user.username)
+    elif bruh == 2:
+        pass 
+
+    return flask.redirect('/calendar')
+
 @app.route('/calendar')
 @flask_login.login_required
 def index_calendar():
-    return flask.render_template('calendar.html')
+    tmplt = "{title: '%s', start: '%s', allDay: true, id: '%s'}"
+    e = util.getTasks(flask_login.current_user.username)
+    s = '['
+
+    # task is a tuple in the form of (id, username, task, ddl)
+    for i in e:
+        s += tmplt % (i[2], str(i[3]), i[2]) + ','
+
+    s += ']'
+
+    return flask.render_template('calendar.html', event = s)
 
 
 @app.route('/settings')

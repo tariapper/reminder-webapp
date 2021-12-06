@@ -73,8 +73,9 @@ def addTask(task, deadline, user):
     cur = conn.cursor()
     cur.execute(
         "CREATE TABLE IF NOT EXISTS tasks (id SERIAL PRIMARY KEY, username VARCHAR, task VARCHAR, deadline DATE)")
-    cur.execute("INSERT INTO tasks (username, task, deadline) VALUES (%s, %s, %s)", (user, task, deadline))
+    cur.execute("INSERT INTO tasks (username, task, deadline) VALUES (%s, %s, %s) RETURNING id", (user, task, deadline))
     conn.commit()
+    return cur.fetchone()[0]
 
 
 def getTasks(user):
