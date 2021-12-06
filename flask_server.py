@@ -153,12 +153,12 @@ def index_removedAll_POST():
     util.removeAllTasks(flask_login.current_user.username)
     return flask.redirect(flask.url_for('index_tasks_remindersGET'))
 
-# @app.route('/reset', methods=['POST'])
-# @flask_login.login_required
-# def reset_POST():
-#     util.deleteAccount(flask_login.current_user.username)
-#     util.removeAllTasks(flask_login.current_user.username)
-#     return flask.redirect(flask.url_for('registerGET'))
+@app.route('/reset', methods=['POST'])
+@flask_login.login_required
+def reset_POST():
+    util.deleteAccount(flask_login.current_user.username)
+    util.removeAllTasks(flask_login.current_user.username)
+    return flask.redirect(flask.url_for('registerGET'))
 
 
 
