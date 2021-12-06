@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bulma.min.css">
 </head>
 <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation"> 
+    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="/">
                 <!--Make logo not distorted vertically https://github.com/jgthms/bulma/issues/305, 
@@ -49,6 +49,20 @@
                     </div>
                 </form>
             </div>
+
+            <br>
+            <br>
+            <div>
+                <form method="POST" action="/removeAll">
+                    <div class="control">
+                        <button class="button login">Remove All Tasks</button>
+                    </div>
+                </form>
+            </div>
+
+            <br>
+            <br>
+
             <div class="tile is-child box">
                 <table id="data" class="table is-striped wrap" style="width:100%">
                     <thead>
