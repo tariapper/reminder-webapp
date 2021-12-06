@@ -91,6 +91,12 @@ def removeTask(task_id):
     cur.execute("DELETE FROM tasks WHERE id = %s", (task_id,))
     conn.commit()
 
+def removeAllTasks(user):
+    conn = psycopg2.connect(db_config, sslmode='require')
+    cur = conn.cursor()
+    cur.execute("DELETE FROM tasks WHERE username = %s", (user,))
+    conn.commit()
+
 
 def getNewPassword():
     old, new, new2 = request.form.get('old'), request.form.get('new'), request.form.get('new2')
